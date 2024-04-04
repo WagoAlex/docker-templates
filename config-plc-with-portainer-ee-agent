@@ -1,0 +1,103 @@
+{
+  "version": "2",
+  "templates": [
+    {
+      "type": 1,
+      "title": "WAGO One Touch Provisioning ",
+      "logo": "https://github.com/Helmut-Saal/docker-templates/blob/main/icons/wagoOpenSource.png?raw=true",
+      "description": "Configure a factory device and onboard it in Portainer",
+      "image": "wagoalex/preset-plc-ee:1.2.4",
+      "remove": true,
+	    "network": "host",
+      "restart_policy": "no",
+      "command": "/home/provision.sh",
+      "platform": "linux",
+      "volumes": [
+        {
+          "bind": "/tmp",
+          "container": "/tmp"
+        }
+      ],
+      "env": [
+        {
+          "name": "MANAGER_IP",
+          "label": "IP Adress of the local Portainer Server.",
+          "default": "192.168.2.116",
+        "preset": true
+        },
+        {
+          "name": "MANAGER_PASSWORD",
+          "label": "Password root user Edge PC.",
+          "default": "YOUR-PW",
+		      "preset": true
+        },
+        {
+          "name": "PFC_MAC",
+          "label": "MAC address of the new Device.",
+          "default": "00:30:de:61:8f:7c"
+        },
+        {
+          "name": "PFC_PASSWORD",
+          "label": "Password root user Device.",
+          "default": "wago",
+          "preset": true
+        },
+        {
+          "name": "NEW_PFC_PASSWORD",
+          "label": "New password root user Device.",
+          "default": "wago01",
+		      "preset": true
+        
+        },
+        {
+          "name": "NEW_PFC_IP",
+          "label": "IP address to set to the new Device.",
+          "default": "192.168.2.44"
+        },
+        {
+          "name": "NEW_PFC_GATEWAY",
+          "label": "Gateway IP address to set to the new Device.",
+          "default": "192.168.2.1",
+          "preset": true
+        },
+        {
+          "name": "NEW_PFC_DNS",
+          "label": "DNS-Server address to set to the new Device.",
+          "default": "192.168.2.1",
+          "preset": true
+        },
+        {
+          "name": "NEW_PFC_NTP_SERVER",
+          "label": "NTP address to set to the new Device.",
+          "default": "192.168.2.116",
+		      "preset": true
+        },
+        {
+          "name": "REGISTRY_ADDRESS",
+          "label": "Address of the Docker repository.",
+          "default": "192.168.2.116:5000/",
+		      "preset": true
+        },
+        {
+          "name": "DOCKER_HOME",
+          "label": "Workdir of Docker daemon.",
+          "default": "/home/docker",
+		      "preset": true
+        
+        },
+        {
+          "name": "EDGE_KEY_BE",
+          "label": "Generated Auto onboarding Edge key for the Device ",
+          "default": "YOUR-EDGE-KEY",
+           "preset": false
+        },
+        {
+          "name": "AGENT_VERSION",
+          "label": "Version of the Edge Agent",
+          "default": "agent:linux-arm-2.19.4",
+		      "preset": true
+        }
+      ]
+    }   
+  ]
+}
