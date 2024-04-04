@@ -1,0 +1,302 @@
+{
+  "version": "2",
+  "templates": [
+    {
+      "type": 1,
+      "title": "WAGO One Touch Provisioning",
+      "logo": "https://github.com/Helmut-Saal/docker-templates/blob/main/icons/wagoOpenSource.png?raw=true",
+      "description": "Provision a new device",
+      "image": "wagoautomation/preset-plc:1.2.3",
+      "remove": true,
+	    "network": "host",
+      "restart_policy": "no",
+      "command": "/home/alpine/provision.sh",
+      "platform": "linux",
+      "volumes": [
+        {
+          "bind": "/tmp",
+          "container": "/tmp"
+        }
+      ],
+      "env": [
+        {
+          "name": "MANAGER_IP",
+          "label": "IP Adress of Portainer Server.",
+          "default": "192.168.2.202"
+        },
+        {
+          "name": "MANAGER_PASSWORD",
+          "label": "Password root user Edge PC.",
+          "default": "",
+		  "preset": true
+        },
+        {
+          "name": "PFC_MAC",
+          "label": "MAC address of the new Device.",
+          "default": "00:30:de:61:8f:7c"
+        },
+        {
+          "name": "PFC_PASSWORD",
+          "label": "Password root user Device.",
+          "default": "wago"
+        },
+        {
+          "name": "NEW_PFC_PASSWORD",
+          "label": "New password root user Device.",
+          "default": "wago01",
+		  "preset": true
+        
+        },
+        {
+          "name": "NEW_PFC_IP",
+          "label": "IP address to set to the new Device.",
+          "default": "192.168.2.217"
+        },
+        {
+          "name": "NEW_PFC_GATEWAY",
+          "label": "Gateway IP address to set to the new Device.",
+          "default": "192.168.2.1"
+        },
+        {
+          "name": "NEW_PFC_HOSTNAME",
+          "label": "Hostname to set to the new Device.",
+          "default": "pfc-worker-"
+        },
+        {
+          "name": "NEW_PFC_NTP_SERVER",
+          "label": "NTP address to set to the new Device.",
+          "default": "192.168.2.202",
+		  "preset": true
+        },
+        {
+          "name": "REGISTRY_ADDRESS",
+          "label": "Address of the Docker repository.",
+          "default": "192.168.2.202:5000/",
+		  "preset": true
+        },
+        {
+          "name": "DOCKER_HOME",
+          "label": "Workdir of Docker daemon.",
+          "default": "/home/docker",
+		  "preset": true
+        
+        },
+        {
+          "name": "EDGE_KEY",
+          "label": "Generated Edge key for the Device",
+          "default": "---------------------------------"
+        },
+        {
+          "name": "EDGE_ID",
+          "label": "Generated Edge ID for the Device",
+          "default": "------------"
+        },
+        {
+          "name": "AGENT_VERSION",
+          "label": "Version of the Edge Agent",
+          "default": "agent-arm:2.19.4",
+		  "preset": true
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "WAGO One Touch Provisioning - Local & Remote Onboarding",
+      "logo": "https://github.com/Helmut-Saal/docker-templates/blob/main/icons/wagoOpenSource.png?raw=true",
+      "description": "Provision a device locally and remote",
+      "image": "localhost:5000/preset-plc:1.2.4",
+      "remove": true,
+	  "network": "host",
+      "restart_policy": "no",
+      "command": "/home/provision.sh",
+      "platform": "linux",
+      "volumes": [
+        {
+          "bind": "/tmp",
+          "container": "/tmp"
+        }
+      ],
+      "env": [
+        {
+          "name": "MANAGER_IP",
+          "label": "IP Adress of the local Portainer Server.",
+          "default": "192.168.2.202",
+        "preset": true
+        },
+        {
+          "name": "MANAGER_PASSWORD",
+          "label": "Password root user Edge PC.",
+          "default": "",
+		  "preset": true
+        },
+        {
+          "name": "PFC_MAC",
+          "label": "MAC address of the new Device.",
+          "default": "00:30:de:61:8f:7c"
+        },
+        {
+          "name": "PFC_PASSWORD",
+          "label": "Password root user Device.",
+          "default": "wago"
+        },
+        {
+          "name": "NEW_PFC_PASSWORD",
+          "label": "New password root user Device.",
+          "default": "wago01",
+		  "preset": true
+        
+        },
+        {
+          "name": "NEW_PFC_IP",
+          "label": "IP address to set to the new Device.",
+          "default": "192.168.2.42"
+        },
+        {
+          "name": "NEW_PFC_GATEWAY",
+          "label": "Gateway IP address to set to the new Device.",
+          "default": "192.168.2.1",
+          "preset": true
+        },
+        {
+          "name": "NEW_PFC_DNS",
+          "label": "DNS-Server address to set to the new Device.",
+          "default": "192.168.2.1",
+          "preset": true
+        },
+        {
+          "name": "NEW_PFC_NTP_SERVER",
+          "label": "NTP address to set to the new Device.",
+          "default": "192.168.2.202",
+		  "preset": true
+        },
+        {
+          "name": "REGISTRY_ADDRESS",
+          "label": "Address of the Docker repository.",
+          "default": "192.168.2.202:5000",
+		  "preset": true
+        },
+        {
+          "name": "DOCKER_HOME",
+          "label": "Workdir of Docker daemon.",
+          "default": "/home/docker",
+		  "preset": true
+        
+        },
+        {
+          "name": "EDGE_KEY",
+          "label": "Generated Edge key for the Device from local Portainer Server",
+          "default": ""---------------------------",",
+		  "preset": true
+        },
+        {
+          "name": "EDGE_ID",
+          "label": "Generated Edge ID for the Device from local Portainer Server",
+          "default": "------",
+          "preset": true
+        },
+        {
+          "name": "EDGE_KEY_BE",
+          "label": "Generated Edge key for the Device from the Cloud",
+          "default": "---------------------------",
+      "preset": true
+        },
+        {
+          "name": "AGENT_VERSION",
+          "label": "Version of the Edge Agent",
+          "default": "/portainer-agent-arm:2.19.4",
+		  "preset": true
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "WAGO One Touch Provisioning [Advanced]",
+      "logo": "https://github.com/Helmut-Saal/docker-templates/blob/main/icons/wagoOpenSource.png?raw=true",
+      "description": "Provision a new device with more configuration options",
+      "image": "wagoautomation/preset-plc:1.2.3",
+      "remove": true,
+      "restart_policy": "no",
+      "command": "/home/alpine/provision.sh",
+      "platform": "linux",
+      "volumes": [
+        {
+          "bind": "/tmp",
+          "container": "/tmp"
+        }
+      ],
+      "env": [
+        {
+          "name": "MANAGER_IP",
+          "label": "IP Adress of Portainer Server.",
+          "default": "192.168.2.202"
+        },
+        {
+          "name": "MANAGER_PASSWORD",
+          "label": "Password root user Edge PC.",
+          "default": "Master1!"
+        },
+        {
+          "name": "PFC_MAC",
+          "label": "MAC address of the new Device.",
+          "default": "00:30:de:61:8f:7c"
+        },
+        {
+          "name": "PFC_PASSWORD",
+          "label": "Password root user Device.",
+          "default": "wago"
+        },
+        {
+          "name": "NEW_PFC_PASSWORD",
+          "label": "New password root user Device.",
+          "default": "wago01"
+        },
+        {
+          "name": "NEW_PFC_IP",
+          "label": "IP address to set to the new Device.",
+          "default": "192.168.2.42"
+        },
+        {
+          "name": "NEW_PFC_GATEWAY",
+          "label": "Gateway IP address to set to the new Device.",
+          "default": "192.168.2.1"
+        },
+        {
+          "name": "NEW_PFC_HOSTNAME",
+          "label": "Hostname to set to the new Device.",
+          "default": "pfc-worker-ee-"
+        },
+        {
+          "name": "NEW_PFC_NTP_SERVER",
+          "label": "NTP address to set to the new Device.",
+          "default": "192.168.2.202"
+        },
+        {
+          "name": "REGISTRY_ADDRESS",
+          "label": "Address of the Docker repository.",
+          "default": "192.168.2.202:5000"
+        },
+        {
+          "name": "DOCKER_HOME",
+          "label": "Workdir of Docker daemon.",
+          "default": "/home/docker"
+        },
+        {
+          "name": "EDGE_KEY",
+          "label": "Generated Edge key for the Device",
+          "default": "--------------------------"
+        },
+        {
+          "name": "EDGE_ID",
+          "label": "Generated Edge ID for the Device",
+          "default": "------"
+        },
+       
+        {
+          "name": "AGENT_VERSION",
+          "label": "Version of the Edge Agent",
+          "default": "portainer-agent-arm:2.19.4"
+        }
+      ]
+    }   
+  ]
+}
